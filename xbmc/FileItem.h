@@ -520,6 +520,12 @@ public:
    */
   std::string GetLocalMetadataPath() const;
 
+  /*! \brief Get the path that should be used as the anchor for associated subtitles.
+   This is usually the resolved playback path, except for .strm items where subtitles
+   should be associated with the local .strm file rather than its resolved target URL.
+   */
+  std::string GetSubtitleAnchorPath() const;
+
   // finds a matching local trailer file
   std::string FindTrailer() const;
 

@@ -3709,6 +3709,14 @@ std::string CFileItem::GetLocalMetadataPath() const
   return parent;
 }
 
+std::string CFileItem::GetSubtitleAnchorPath() const
+{
+  if (GetURL().HasExtension(".strm"))
+    return m_strPath;
+
+  return GetDynPath();
+}
+
 bool CFileItem::LoadMusicTag()
 {
   // not audio

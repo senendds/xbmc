@@ -128,7 +128,7 @@ std::string CGUIDialogSubtitleSettings::BrowseForSubtitle()
   }
 
   std::string strPath;
-  const std::string dynPath{g_application.CurrentFileItem().GetDynPath()};
+  const std::string dynPath{g_application.CurrentFileItem().GetSubtitleAnchorPath()};
   if (URIUtils::IsInRAR(dynPath) || URIUtils::IsInZIP(dynPath))
   {
     strPath = CURL(dynPath).GetHostName();
