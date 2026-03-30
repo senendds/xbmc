@@ -118,6 +118,13 @@ do_clean_get $1
 [ -f config.mak ] && make distclean
 cleanLastSuccess $FFMPEGDESTDIR
 
+# FFmpeg 6.0.1 detects MSVC by parsing English "Version" from cl.exe output.
+# On localized toolchains (e.g. Spanish "versión"), that leaves cl_major_ver
+# empty and configure aborts with "Unsupported MSVC version". Match the first
+# major version number instead of the localized word.
+#sed -i 's/cl_major_ver=$(cl\.exe 2>\&1 | sed -n '\''s\/\.\*Version \\\(\[\[:digit:\]\]\\{1,\\}\\)\\\.\.\*\/\\\\1\/p'\''))/cl_major_ver=$(cl.exe 2>\&1 | sed -n '\''s\/.* \\([0-9][0-9]*\\)\\..*\/\\1\/p'\'' | head -n 1)/' "$LOCALSRCDIR/configure"
+sed -i 's/cl_major_ver=.*/cl_major_ver=19/' "$LOCALSRCDIR/configure"
+
 do_print_status "$LIBNAME-$VERSION (${TRIPLET})" "$blue_color" "Configuring"
 
 [[ -z "$extra_cflags" ]] && extra_cflags=-DPTW32_STATIC_LIB
