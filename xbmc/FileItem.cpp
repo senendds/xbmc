@@ -3711,7 +3711,7 @@ std::string CFileItem::GetLocalMetadataPath() const
 
 std::string CFileItem::GetSubtitleAnchorPath() const
 {
-  if (GetURL().HasExtension(".strm"))
+  if (URIUtils::HasExtension(m_strPath, ".strm"))
     return m_strPath;
 
   return GetDynPath();
