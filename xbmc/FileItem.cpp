@@ -1167,6 +1167,11 @@ bool CFileItem::IsPlayList() const
   return CPlayListFactory::IsPlaylist(*this);
 }
 
+bool CFileItem::IsStrm() const
+{
+  return URIUtils::HasExtension(m_strPath, ".strm");
+}
+
 bool CFileItem::IsPythonScript() const
 {
   return URIUtils::HasExtension(m_strPath, ".py");
@@ -3711,7 +3716,7 @@ std::string CFileItem::GetLocalMetadataPath() const
 
 std::string CFileItem::GetSubtitleAnchorPath() const
 {
-  if (URIUtils::HasExtension(m_strPath, ".strm"))
+  if (IsStrm())
     return m_strPath;
 
   return GetDynPath();
